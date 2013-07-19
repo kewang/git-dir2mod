@@ -20,12 +20,16 @@ function usage(){
   echo "	foo/bar/xxx"
   echo "	foo/bar/www"
   echo
+  echo "If you want to subdirectory 'bar' to git submodule, you can execute following command:"
+  echo
   echo "	`basename $0` -m bar -u https://github.com/kewangtw/bar.git"
 }
 
+if [ $# -ne 5 ]; then
+  usage
 
-
-usage
+  exit 1
+fi
 
 ORIG_PWD=`pwd`
 MOD_NAME=$2
