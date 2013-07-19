@@ -7,6 +7,12 @@
 # $3 want to change dir
 # $4 new submodule repository name
 
+function usage(){
+  echo "Usage: $0"
+}
+
+usage
+
 read -p "Please input original repository folder: " ORIG_REPO_FOLDER
 read -p "Please input new submodule name: " NEW_MOD_NAME
 read -p "Please input want to change folder name: " DIR_NAME
