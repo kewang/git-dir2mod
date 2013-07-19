@@ -15,6 +15,7 @@ git-dir2mod.sh -m mod -u url
 
 # Example
 
+```
 foo/aaa
 foo/bbb
 foo/ccc
@@ -23,6 +24,7 @@ foo/bar/zzz
 foo/bar/yyy
 foo/bar/xxx
 foo/bar/www
+```
 
 If you want to subdirectory 'bar' to git submodule, you can execute following command:
 
