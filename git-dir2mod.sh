@@ -4,9 +4,8 @@
 
 function usage(){
   echo "Usage:"
-  echo "	`basename $0` -i path -m mod -u url"
+  echo "	`basename $0` -m mod -u url"
   echo
-  echo "		-i path		original repository folder"
   echo "		-m mod		new submodule name"
   echo "		-u url		new submodule repository url"
   echo
@@ -21,20 +20,25 @@ function usage(){
   echo "	foo/bar/xxx"
   echo "	foo/bar/www"
   echo
-  echo "	`basename $0` -i foo -m bar -u https://github.com/kewangtw/bar.git"
+  echo "	`basename $0` -m bar -u https://github.com/kewangtw/bar.git"
 }
+
+
 
 usage
 
-read -p "Please input original repository folder: " ORIG_REPO_FOLDER
-read -p "Please input new submodule name: " MOD_NAME
-read -p "Please input new submodule repository url: " MOD_REPO_URL
+ORIG_PWD=`pwd`
+MOD_NAME=$2
+MOD_REPO_URL=$4
 
 # Clone new repositories.
-git clone --no-hardlinks $ORIG_REPO_FOLDER $MOD_NAME
+mkdir -p /tmp/dir2mod/
+
+git clone --no-hardlinks . /tmp/dir2mod/$MOD_NAME
 
 # Filter out the files you want to keep and remove the others.
-cd $MOD_NAME
+cd /tmp/dir2mod/$MOD_NAME
+
 git filter-branch --subdirectory-filter $MOD_NAME HEAD -- --all
 git reset --hard
 git gc --aggressive
@@ -46,7 +50,8 @@ git remote add origin $MOD_REPO_URL
 git push -u origin master
 
 # Add the new repository as submodules to the original repository
-cd ../$ORIG_REPO_FOLDER
+cd $ORIG_PWD
+
 git rm -r $MOD_NAME
 git commit -m "Removing the folders that are now repositories"
 git submodule add $MOD_REPO_URL $MOD_NAME
@@ -55,3 +60,5 @@ git submodule update
 git add .
 git commit -m "Added in submodules for removed folders"
 git push
+
+rm -rf /tmp/dir2mod/$MOD_NAME
