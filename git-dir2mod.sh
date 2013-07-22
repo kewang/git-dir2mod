@@ -20,7 +20,7 @@ function usage(){
   echo "	foo/bar/xxx"
   echo "	foo/bar/www"
   echo
-  echo "If you want to subdirectory 'bar' to git submodule, you can execute following command:"
+  echo "If you have a git repo 'foo', and want to subdirectory 'bar' to git submodule, you can execute following command:"
   echo
   echo "	`basename $0` -m bar -u https://github.com/kewangtw/bar.git"
 }

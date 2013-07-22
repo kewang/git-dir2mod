@@ -26,7 +26,7 @@ foo/bar/xxx
 foo/bar/www
 ```
 
-If you want to subdirectory 'bar' to git submodule, you can execute following command:
+If you have a git repo 'foo', and want to subdirectory 'bar' to git submodule, you can execute following command:
 
 `git-dir2mod.sh -m bar -u https://github.com/kewangtw/bar.git`
 
