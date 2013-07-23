@@ -25,15 +25,31 @@ function usage(){
   echo "	`basename $0` -m bar -u https://github.com/kewangtw/bar.git"
 }
 
-if [ $# -ne 5 ]; then
+while getopts m:u:h opt
+do
+  case $opt in
+    m)
+      MOD_NAME=$OPTARG
+
+      ;;
+    u)
+      MOD_REPO_URL=$OPTARG
+
+      ;;
+    h)
+      usage
+
+      exit 1
+  esac
+done
+
+if [ $# -eq 0 ]; then
   usage
 
   exit 1
 fi
 
 ORIG_PWD=`pwd`
-MOD_NAME=$2
-MOD_REPO_URL=$4
 
 # Clone new repositories.
 mkdir -p /tmp/dir2mod/
