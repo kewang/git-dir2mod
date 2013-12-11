@@ -67,6 +67,7 @@ git remote rm origin
 
 # Push the new repositories to the upstream server.
 git remote add origin $MOD_REPO_URL
+git branch master
 git push -u origin master
 
 # Add the new repository as submodules to the original repository
